@@ -108,20 +108,20 @@ jobs:
       # data, or by pushing a BASELINE** tag.
       - name: Set environment variables
         run: |
-          echo "::set-env name=TEST_AUDIO_ZIP_FILE::test-audio.zip"
-          echo "::set-env name=TEST_BUILD_FOLDER_PATH::build-speech-test"
+          echo "TEST_AUDIO_ZIP_FILE=test-audio.zip" >> $GITHUB_ENV
+          echo "TEST_BUILD_FOLDER_PATH=build-speech-test" >> $GITHUB_ENV
           if [[ ${GITHUB_REF/refs\/tags\//} == BASELINE* ]]
           then
             echo WORKFLOW TRIGGERED BY A BASELINE TAG.
-            echo ::set-env name=EVENT_ID::${GITHUB_REF/refs\/tags\//}
-            echo "::set-env name=HYPHEN_EVENT_NAME::baseline-tag"
-            echo "::set-env name=IS_BASELINE_TEST::true"
-            echo "::set-env name=UNDERSCORE_EVENT_NAME::baseline_tag"
+            echo "EVENT_ID=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+            echo "HYPHEN_EVENT_NAME=baseline-tag" >> $GITHUB_ENV
+            echo "IS_BASELINE_TEST=true" >> $GITHUB_ENV
+            echo ":UNDERSCORE_EVENT_NAME=baseline_tag" >> $GITHUB_ENV
           else
             echo WORKFLOW TRIGGERED BY A TEST DATA UPDATE.
-            echo "::set-env name=EVENT_ID::$(git rev-parse --short HEAD)"
-            echo "::set-env name=HYPHEN_EVENT_NAME::test-data-update"
-            echo "::set-env name=UNDERSCORE_EVENT_NAME::test_data_update"
+            echo "EVENT_ID=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+            echo "HYPHEN_EVENT_NAME=test-data-update" >> $GITHUB_ENV
+            echo "UNDERSCORE_EVENT_NAME=test_data_update" >> $GITHUB_ENV
           fi
 
       # https://github.com/msimecek/Azure-Speech-CLI
@@ -151,7 +151,7 @@ jobs:
             echo "::error ::Failed to upload audio and human-labeled transcript testing data. Check that the correct paths are defined in environment variables or re-run all jobs."
             exit 1
           fi
-          echo "::set-env name=AUDIO_TRANS_TEST_ID::$(echo $audio_trans_test_id)"
+          echo "AUDIO_TRANS_TEST_ID=$(echo $audio_trans_test_id)" >> $GITHUB_ENV
 
       # If a benchmark model exists, it will be tested later in the workflow.
       #
@@ -169,11 +169,11 @@ jobs:
           if [[ ${custom_speech_model_id//-/} =~ ^[[:xdigit:]]{32}$ ]]
           then
             echo IF THIS IS NOT A BASELINE TEST, TEST THE BENCHMARK CUSTOM SPEECH MODEL WITH GUID: $custom_speech_model_id
-            echo "::set-env name=MODEL_ID::$(echo $custom_speech_model_id)"
+            echo "MODEL_ID=$(echo $custom_speech_model_id)" >> $GITHUB_ENV
           else
             echo NO EXISTING CUSTOM SPEECH MODELS. TEST THE LATEST BASELINE MODEL.
-            echo "::set-env name=INITIAL_MODEL_EXISTS::false"
-            echo "::set-env name=IS_BASELINE_TEST::true"
+            echo "INITIAL_MODEL_EXISTS=false" >> $GITHUB_ENV
+            echo "IS_BASELINE_TEST=true" >> $GITHUB_ENV
           fi
 
       # If a benchmark model does not exist, or if a user pushed a tag beginning
@@ -193,7 +193,7 @@ jobs:
             exit 1
           fi
           echo TEST THE LATEST BASELINE MODEL WITH GUID: $baseline_model_id
-          echo "::set-env name=MODEL_ID::$(echo $baseline_model_id)"
+          echo "MODEL_ID=$(echo $baseline_model_id)" >> $GITHUB_ENV
 
       # Test with Speech.
       #
@@ -204,12 +204,13 @@ jobs:
         run: |
           speech test create -n test_from_${{ env.UNDERSCORE_EVENT_NAME }}_${{ env.EVENT_ID }} -a ${{ env.AUDIO_TRANS_TEST_ID }} -m ${{ env.MODEL_ID }} -lm ${{ env.MODEL_ID }} --wait > ${{ env.TEST_BUILD_FOLDER_PATH }}/test-output.txt
           test_id=$(cat ${{ env.TEST_BUILD_FOLDER_PATH }}/test-output.txt | sed -n '3p')
+          echo $test_id
           if ! [[ ${test_id//-/} =~ ^[[:xdigit:]]{32}$ ]]
           then
             echo "::error ::Failed to test the Custom Speech model. Possibly re-run all jobs."
             exit 1
           fi
-          echo "::set-env name=TEST_ID::$(echo $test_id)"
+          echo "TEST_ID=$(echo $test_id)" >> $GITHUB_ENV
 
       - name: Delete testing datasets
         run: |
@@ -221,7 +222,7 @@ jobs:
       - name: Store JSON test output
         run: |
           test_summary_file_name="test-summary-from-${{ env.HYPHEN_EVENT_NAME }}-${{ env.EVENT_ID }}.json"
-          echo "::set-env name=TEST_SUMMARY_FILE::$(echo $test_summary_file_name)"
+          echo "TEST_SUMMARY_FILE=$(echo $test_summary_file_name)" >> $GITHUB_ENV
           speech test show ${{ env.TEST_ID }} > ${{ env.TEST_BUILD_FOLDER_PATH }}/$test_summary_file_name
           sed -i '1d' ${{ env.TEST_BUILD_FOLDER_PATH }}/$test_summary_file_name
 
@@ -255,7 +256,7 @@ jobs:
           echo DELETED TEST.
 
       - name: Verify the configuration file exists
-        run: az storage blob exists --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }} --container-name configuration --name benchmark-test.txt --auth-mode login | jq '.exists' | xargs -I {} echo "::set-env name=BENCHMARK_BLOB_EXISTS::{}"
+        run: az storage blob exists --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }} --container-name configuration --name benchmark-test.txt --auth-mode login | jq '.exists' | xargs -I {} echo "BENCHMARK_BLOB_EXISTS={}" >> $GITHUB_ENV
 
       # The configuration container has a file, benchmark-test.txt, that
       # contains the name of the test summary file that was output from testing

@@ -400,10 +400,9 @@ jobs:
       - name: STOPPING WORKFLOW - WER not improved
         if: env.BENCHMARK_WER <= env.NEW_WER
         run: |
-          speech model delete ${{ env.CUSTOM_SPEECH_MODEL_ID }}
-          echo DELETED CUSTOM SPEECH MODEL.
-          echo "::error ::Failed to improve upon the benchmark Custom Speech model. Submit a pull request with updates to training data to try again."
-          exit 1
+          echo ${{ env.TEST_SUMMARY_FILE }} > ${{ env.TEST_BUILD_FOLDER_PATH }}/benchmark-test.txt
+          az storage blob upload --account-name ${{ secrets.STORAGE_ACCOUNT_NAME }} --container-name configuration --name benchmark-test.txt --file ${{ env.TEST_BUILD_FOLDER_PATH }}/benchmark-test.txt --auth-mode login
+          echo "::info ::Failed to improve upon the benchmark Custom Speech model."
 
   #############################################################################
   #

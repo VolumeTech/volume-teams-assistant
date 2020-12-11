@@ -98,10 +98,10 @@ jobs:
         with:
           # Indicates all history.
           fetch-depth: "0"
-          # lfs: true
+            lfs: true
 
-      # - name: Checkout LFS objects
-      #   run: git lfs checkout
+       - name: Checkout LFS objects
+         run: git lfs checkout
 
       # Set environment variables needed throughout the workflow, including
       # those specific to whether the workflow was triggered by updating test

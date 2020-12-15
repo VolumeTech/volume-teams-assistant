@@ -1,3 +1,169 @@
-3CPO	three c p o
-CNTK	c n t k
-IEEE	i triple e
+.MD	dot m d
+AllenNLP	Alan n l p
+Alison	Allison
+Amey	Amy
+ARC	a r c
+Asiri	a siri
+because	becausew
+Bee	bee
+Bee	b
+Benoit	ben wa
+Benoit	Ben well
+Benoit	ben 1
+Benoit	baignoire
+Bryn	bri n
+Bryn	bre n
+chatbot	chat bot
+CTO	cto
+CMS	c m s
+Cogcom	cog com
+decert	dee sert
+dev	dev
+EBIT DA	e bit da
+Farrah	fa ra
+Farrah	Farah
+Firebase	fire base
+Fruut	froot
+Fruut	fruit
+Fruut	footer
+Fruutbot	fruit bot 
+Fruutbot	froot bot
+Fruutbot	foot bot
+Fruutbot	fruit bought
+Fruutbot's	fruit bot's
+Fruutbot	Frik bot
+Fruutbot	freeport
+Fruutbot	fruit board
+Intuit	in choo it
+Intuit	in too it
+Halldor	hal dor
+Halldor	hal door
+JMS	j m s
+Joe	jo
+Kalum	ka loom
+Kym	Kim
+K-fold	k fold
+Leanne	lee ann
+LSTM	lstm
+LUIS	luis
+LUIS	Louise
+LUIS	lewis
+Marc	Mark
+MD	em dee
+ME	em e
+MD	m d
+Memo	memo
+MRC
+Newbury	new bu ree
+Newbury	new berry
+NLP	n l p
+NLP en el pee
+Paolo	Palo
+Paolo	Paulo
+Paolo 	polo
+Q1	Q 1
+Q2	Q 2
+Q3	Q 3
+Q4	Q 4
+QBox	Q Box
+QBox	key box
+QBox	cubox
+R M	ar em
+Rasa	raza
+Rasa	ra za
+recert	ree sert
+relate	ree late
+Sri Lanka	shree lank a
+Salesforce	sales force
+sati	set e
+Sati	sat e
+Seamus	Sheamus
+Seamus	shame us
+SpaCy	spacy
+SpaCy	space ee
+Simi	see mee
+STT	s t t
+STT	es tee tee
+Tanya	tan ya
+Tanya	Tonya
+tech	tek 
+UAT	u a t
+UAT	you 80
+UX	u x
+Zoom	zoom
+Teams	teams
+Volume	volume
+Volume.ai	volume dot a i
+Ridgeway Global	ridge way global
+COO	c o o
+COO	Cielo
+Lall	lal
+Sati Lall	sat e lal
+Sati Lall	set e lal
+COVID	co vid
+COVID-19	co vid 19
+corona	co roh nah
+coronavirus	corona virus
+Savill	sa vil
+Savill's	sa vils
+Alan	Allen
+Aidan	ey dan
+Aidan's	ey dans
+Ridgeway	retry
+Ridgeway	retreat
+Alex Mann	Alex man
+Alan	our land
+COO	see oh oh
+COO	c oh oh
+pound	pan
+favour	favor
+jolon	her loan
+covid	kovid
+covid	ko vid
+$1,000,000	1,000,000 dollars
+$1,000,000	1 million dollars
+$1,000,000	one million dollars
+$1,000,000	a million dollars
+$2,000,000	2,000,000 dollars
+$2,000,000	2 million dollars
+$2,000,000	two million dollars
+$75,000,000	75,000,000 dollars
+$75,000,000	75 million dollars
+$75,000,000	seventy five million dollars
+$1,000,000	1,000,000 dollar
+$1,000,000	1 million dollar
+$1,000,000	one million dollar
+$1,000,000	a million dollar
+$2,000,000	2,000,000 dollar
+$2,000,000	2 million dollar
+$2,000,000	two million dollar
+$75,000,000	75,000,000 dollar
+$75,000,000	75 million dollar
+$75,000,000	seventy five million dollar
+$5,000,000 5 million dollar
+$5,000,000 5,000,000 dollar
+£5,000,000 5 million pound
+£5,000,000 5,000,000 pound
+recertification	re certification
+decertification	dee certification
+Memo	marrow
+C#	c sharp
+TFS	t f s
+.py	dot pie
+.py	dot py
+.txt	dot text
+.txt	dot t x t
+WPF	w p f
+H6	h 6
+notepad++	notepad plus plus
+Coursera	course era
+Coursera	Corsair
+CFO	c f o 
+Royal London	royal London
+QBox	queue box
+R&D	r and d
+NLU	n l u
+JLM	j l m
+JLM Technology	j l m technology
+Carver Corporate Finance	carver corporate finance
+Carver	caver
